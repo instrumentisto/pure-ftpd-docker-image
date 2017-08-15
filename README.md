@@ -26,8 +26,6 @@ To run Pure-FTPd server just start the container:
 docker run -d -p 25:25 -p 30000-30009:30000-30009 instrumentisto/pure-ftpd
 ```
 
-If you need virtual FTP accounts, [use PureDB][11] for this needs.
-
 
 ### Why so many ports opened?
     
@@ -61,6 +59,22 @@ By default it uses [default configuration file][10] `/etc/pure-ftpd.conf`.
            instrumentisto/pure-ftpd \
            pure-ftpd /my/pure-ftpd.conf
     ```
+
+
+### Accounts
+
+This image uses [PureDB][11] for virtual FTP accounts.
+
+It's just enough to mount `/etc/pureftpd.passwd` file, which will be converted into `/etc/pureftpd.pdb` file on container start.
+
+Location of `.passwd` file may be changed with `PURE_PASSWDFILE` env var. Location of `.pdb` file may be changed with `PURE_DBFILE` env var.
+
+To generate `pureftpd.passwd` you may use `pure-pw` binary contained in image:
+```bash
+docker run --rm -it -v $(pwd)/my.passwd:/etc/pureftpd.passwd --entrypoint sh \
+       instrumentisto/pure-ftpd \
+           pure-pw useradd joe -u 90 -d /data/joe
+```
 
 
 

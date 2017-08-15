@@ -38,3 +38,11 @@
   run docker run --rm --entrypoint sh $IMAGE -c 'pure-pw --help'
   [ "$status" -eq 0 ]
 }
+
+
+@test "PURE_PASSWDFILE is converted to PURE_DBFILE on container start" {
+  run docker run --rm \
+    -v $(pwd)/test/resources/pureftpd.passwd:/etc/pureftpd.passwd:ro \
+      $IMAGE test -f /etc/pureftpd.pdb
+  [ "$status" -eq 0 ]
+}
