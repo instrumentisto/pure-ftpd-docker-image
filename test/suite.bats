@@ -27,3 +27,14 @@
   run docker run --rm --entrypoint sh $IMAGE -c 'pure-ftpd --help'
   [ "$status" -eq 0 ]
 }
+
+
+@test "pure-pw is installed" {
+  run docker run --rm --entrypoint sh $IMAGE -c 'which pure-pw'
+  [ "$status" -eq 0 ]
+}
+
+@test "pure-pw runs ok" {
+  run docker run --rm --entrypoint sh $IMAGE -c 'pure-pw --help'
+  [ "$status" -eq 0 ]
+}
