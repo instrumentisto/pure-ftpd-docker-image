@@ -14,6 +14,7 @@ RUN apk update \
  # Install Pure-FTPd dependencies
  && apk add --no-cache \
         libressl2.5-libcrypto libressl2.5-libssl \
+        libsodium \
 
  # Install tools for building
  && apk add --no-cache --virtual .tool-deps \
@@ -22,6 +23,7 @@ RUN apk update \
  # Install Pure-FTPd build dependencies
  && apk add --no-cache --virtual .build-deps \
         libressl-dev \
+        libsodium-dev \
 
  # Download and prepare Pure-FTPd sources
  && curl -fL -o /tmp/pure-ftpd.tar.gz \
