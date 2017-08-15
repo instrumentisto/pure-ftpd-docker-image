@@ -92,5 +92,3 @@ EXPOSE 21 30000-30009
 ENTRYPOINT ["/init"]
 
 CMD ["pure-ftpd", "/etc/pure-ftpd.conf"]
-#"-E", "-H", "-k 95", "-R"]
-
