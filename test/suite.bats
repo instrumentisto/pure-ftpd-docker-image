@@ -28,6 +28,21 @@
   [ "$status" -eq 0 ]
 }
 
+@test "pure-ftpd has correct version" {
+  run sh -c "cat Makefile | grep 'VERSION ?= ' | cut -d ' ' -f 3"
+  [ "$status" -eq 0 ]
+  [ ! "$output" = '' ]
+  expected="$output"
+
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    "pure-ftpd --help | head -1 | cut -d ' ' -f 2"
+  [ "$status" -eq 0 ]
+  [ ! "$output" = '' ]
+  actual="$output"
+
+  [ "$actual" = "v$expected" ]
+}
+
 
 @test "pure-pw is installed" {
   run docker run --rm --entrypoint sh $IMAGE -c 'which pure-pw'
