@@ -44,6 +44,7 @@ RUN apk update \
         --without-humor \
         --without-inetd \
         --without-usernames \
+        --with-rfc2640 \
  && make \
 
  # Create Pure-FTPd user and groups
