@@ -23,7 +23,7 @@ PureFTPd‘s mantra is ‘Security First.’ This is evident in the [low number 
 
 To run Pure-FTPd server just start the container: 
 ```bash
-docker run -d -p 25:25 -p 30000-30009:30000-30009 instrumentisto/pure-ftpd
+docker run -d -p 21:21 -p 30000-30009:30000-30009 instrumentisto/pure-ftpd
 ```
 
 
@@ -39,7 +39,7 @@ By default it uses [default configuration file][10] `/etc/pure-ftpd.conf`.
 1. You may either specify your own configuration file instead.
 
     ```bash
-    docker run -d -p 25:25 \ 
+    docker run -d -p 21:21 \
                -v $(pwd)/my.conf:/etc/pure-ftpd.conf \
            instrumentisto/pure-ftpd
     ```
@@ -47,14 +47,14 @@ By default it uses [default configuration file][10] `/etc/pure-ftpd.conf`.
 2. Or specify command line options directly.
 
     ```bash
-    docker run -d -p 25:25 instrumentisto/pure-ftpd \
+    docker run -d -p 21:21 instrumentisto/pure-ftpd \
            pure-ftpd -c 50 -E -H -R
     ```
     
 3. Or even specify another configuration file.
 
     ```bash
-    docker run -d -p 25:25 \ 
+    docker run -d -p 21:21 \
                -v $(pwd)/my.conf:/my/pure-ftpd.conf \
            instrumentisto/pure-ftpd \
            pure-ftpd /my/pure-ftpd.conf
