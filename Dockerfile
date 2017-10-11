@@ -38,13 +38,13 @@ RUN apk update \
         --with-puredb \
         --with-quotas \
         --with-ratios \
+        --with-rfc2640 \
         --with-throttling  \
         --with-tls \
         --without-capabilities \
         --without-humor \
         --without-inetd \
         --without-usernames \
-        --with-rfc2640 \
  && make \
 
  # Create Pure-FTPd user and groups
