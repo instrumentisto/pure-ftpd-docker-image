@@ -38,6 +38,7 @@ RUN apk update \
         --with-puredb \
         --with-quotas \
         --with-ratios \
+        --with-rfc2640 \
         --with-throttling  \
         --with-tls \
         --without-capabilities \
