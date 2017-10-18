@@ -10,21 +10,21 @@ RUN apk update \
  && apk add --no-cache \
         ca-certificates \
  && update-ca-certificates \
-
+    \
  # Install Pure-FTPd dependencies
  && apk add --no-cache \
         libressl2.5-libcrypto libressl2.5-libssl \
         libsodium \
-
+    \
  # Install tools for building
  && apk add --no-cache --virtual .tool-deps \
         curl coreutils autoconf g++ libtool make \
-
+    \
  # Install Pure-FTPd build dependencies
  && apk add --no-cache --virtual .build-deps \
         libressl-dev \
         libsodium-dev \
-
+    \
  # Download and prepare Pure-FTPd sources
  && curl -fL -o /tmp/pure-ftpd.tar.gz \
          http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-1.0.46.tar.gz \
@@ -32,7 +32,7 @@ RUN apk update \
          | sha512sum -c -) \
  && tar -xzf /tmp/pure-ftpd.tar.gz -C /tmp/ \
  && cd /tmp/pure-ftpd-* \
-
+    \
  # Build Pure-FTPd from sources
  && ./configure --prefix=/usr \
         --with-puredb \
@@ -46,14 +46,14 @@ RUN apk update \
         --without-inetd \
         --without-usernames \
  && make \
-
+    \
  # Create Pure-FTPd user and groups
  && addgroup -S -g 91 pure-ftpd \
  && adduser -S -u 90 -D -s /sbin/nologin \
             -H -h /data \
             -G pure-ftpd -g pure-ftpd \
             pure-ftpd \
-
+    \
  # Install and configure Pure-FTPd
  && make install \
  && install -d -o pure-ftpd -g pure-ftpd /data \
@@ -62,7 +62,7 @@ RUN apk update \
         /etc/pure-ftpd.conf \
  # No documentation included to keep image size smaller
  && rm -rf /usr/share/man/* \
-
+    \
  # Cleanup unnecessary stuff
  && apk del .tool-deps .build-deps \
  && rm -rf /var/cache/apk/* \
@@ -75,7 +75,7 @@ RUN apk add --update --no-cache --virtual .tool-deps \
  && curl -fL -o /tmp/s6-overlay.tar.gz \
          https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.2/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
-
+    \
  # Cleanup unnecessary stuff
  && apk del .tool-deps \
  && rm -rf /var/cache/apk/* \
