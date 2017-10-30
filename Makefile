@@ -13,8 +13,8 @@
 
 
 IMAGE_NAME := instrumentisto/pure-ftpd
-VERSION ?= 1.0.46
-TAGS ?= 1.0.46,1.0,1,latest
+VERSION ?= 1.0.47
+TAGS ?= 1.0.47,1.0,1,latest
 
 no-cache ?= no
 

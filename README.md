@@ -147,7 +147,7 @@ If you have any problems with or questions about this image, please contact us t
 [4]: http://www.musl-libc.org
 [5]: http://www.etalabs.net/compare_libcs.html
 [6]: https://news.ycombinator.com/item?id=10782897
-[10]: https://github.com/jedisct1/pure-ftpd/blob/1.0.46/pure-ftpd.conf.in
+[10]: https://github.com/jedisct1/pure-ftpd/blob/1.0.47/pure-ftpd.conf.in
 [11]: https://download.pureftpd.org/pure-ftpd/doc/README.Virtual-Users
 [12]: https://github.com/stilliard/docker-pure-ftpd/issues/5
 [20]: http://skarnet.org/software/s6/overview.html
