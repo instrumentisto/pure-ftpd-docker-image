@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/alpine
-FROM alpine:3.6
+FROM alpine:3.7
 
 MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
 
@@ -13,7 +13,7 @@ RUN apk update \
     \
  # Install Pure-FTPd dependencies
  && apk add --no-cache \
-        libressl2.5-libcrypto libressl2.5-libssl \
+        libressl2.6-libcrypto libressl2.6-libssl \
         libsodium \
     \
  # Install tools for building
