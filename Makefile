@@ -1,8 +1,7 @@
 # This Makefile automates possible operations of this project.
 #
 # Images and description on Docker Hub will be automatically rebuilt on
-# pushes to `master` branch of this repo and on updates of
-# parent `alpine` image.
+# pushes to `master` branch of this repo and on updates of parent image.
 #
 # Note! Docker Hub `post_push` hook must be always up-to-date with default
 # values of current Makefile. To update it just use:
@@ -16,12 +15,8 @@ IMAGE_NAME := instrumentisto/pure-ftpd
 VERSION ?= 1.0.47
 TAGS ?= 1.0.47,1.0,1,latest
 
-no-cache ?= no
-
 
 comma := ,
-empty :=
-space := $(empty) $(empty)
 eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
                                 $(findstring $(2),$(1))),1)
 
@@ -30,9 +25,9 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 # Build Docker image.
 #
 # Usage:
-#	make image [no-cache=(yes|no)] [VERSION=]
+#	make image [VERSION=<image-version>] [no-cache=(no|yes)]
 
-no-cache-arg = $(if $(call eq, $(no-cache), yes), --no-cache, $(empty))
+no-cache-arg = $(if $(call eq,$(no-cache),yes),--no-cache,)
 
 image:
 	docker build $(no-cache-arg) -t $(IMAGE_NAME):$(VERSION) .
@@ -42,12 +37,11 @@ image:
 # Tag Docker image with given tags.
 #
 # Usage:
-#	make tags [VERSION=] [TAGS=t1,t2,...]
-
-parsed-tags = $(subst $(comma), $(space), $(TAGS))
+#	make tags [VERSION=<image-version>]
+#	          [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
 
 tags:
-	(set -e ; $(foreach tag, $(parsed-tags), \
+	(set -e ; $(foreach tag, $(subst $(comma), ,$(TAGS)), \
 		docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(tag) ; \
 	))
 
@@ -56,10 +50,10 @@ tags:
 # Manually push Docker images to Docker Hub.
 #
 # Usage:
-#	make push [TAGS=t1,t2,...]
+#	make push [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
 
 push:
-	(set -e ; $(foreach tag, $(parsed-tags), \
+	(set -e ; $(foreach tag, $(subst $(comma), ,$(TAGS)), \
 		docker push $(IMAGE_NAME):$(tag) ; \
 	))
 
@@ -68,7 +62,8 @@ push:
 # Make manual release of Docker images to Docker Hub.
 #
 # Usage:
-#	make release [no-cache=(yes|no)] [VERSION=] [TAGS=t1,t2,...]
+#	make release [VERSION=<image-version>] [no-cache=(no|yes)]
+#	             [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
 
 release: | image tags push
 
@@ -83,7 +78,7 @@ release: | image tags push
 # http://windsock.io/automated-docker-image-builds-with-multiple-tags
 #
 # Usage:
-#	make post-push-hook [TAGS=t1,t2,...]
+#	make post-push-hook [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
 
 post-push-hook:
 	mkdir -p $(PWD)/hooks
@@ -96,8 +91,11 @@ post-push-hook:
 
 # Run tests for Docker image.
 #
+# Documentation of Bats:
+#	https://github.com/sstephenson/bats
+#
 # Usage:
-#	make test [VERSION=]
+#	make test [VERSION=<image-version>]
 
 test: deps.bats
 	IMAGE=$(IMAGE_NAME):$(VERSION) ./test/bats/bats test/suite.bats
@@ -107,7 +105,7 @@ test: deps.bats
 # Resolve project dependencies for running tests.
 #
 # Usage:
-#	make deps.bats [BATS_VER=]
+#	make deps.bats [BATS_VER=<bats-version>]
 
 BATS_VER ?= 0.4.0
 
