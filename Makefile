@@ -27,10 +27,9 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 # Usage:
 #	make image [VERSION=<image-version>] [no-cache=(no|yes)]
 
-no-cache-arg = $(if $(call eq,$(no-cache),yes),--no-cache,)
-
 image:
-	docker build $(no-cache-arg) -t $(IMAGE_NAME):$(VERSION) .
+	docker build --network=host $(if $(call eq,$(no-cache),yes),--no-cache,) \
+		-t $(IMAGE_NAME):$(VERSION) .
 
 
 
@@ -81,11 +80,11 @@ release: | image tags push
 #	make post-push-hook [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
 
 post-push-hook:
-	mkdir -p $(PWD)/hooks
-	docker run --rm -i -v $(PWD)/post_push.tmpl.php:/post_push.php:ro \
+	@mkdir -p hooks/
+	docker run --rm -i -v "$(PWD)/post_push.tmpl.php":/post_push.php:ro \
 		php:alpine php -f /post_push.php -- \
 			--image_tags='$(TAGS)' \
-		> $(PWD)/hooks/post_push
+		> hooks/post_push
 
 
 
@@ -110,15 +109,13 @@ test: deps.bats
 BATS_VER ?= 0.4.0
 
 deps.bats:
-ifeq ($(wildcard $(PWD)/test/bats),)
-	mkdir -p $(PWD)/test/bats/vendor
-	curl -fL -o $(PWD)/test/bats/vendor/bats.tar.gz \
+ifeq ($(wildcard test/bats),)
+	@mkdir -p test/bats/vendor/
+	curl -fL -o test/bats/vendor/bats.tar.gz \
 		https://github.com/sstephenson/bats/archive/v$(BATS_VER).tar.gz
-	tar -xzf $(PWD)/test/bats/vendor/bats.tar.gz \
-		-C $(PWD)/test/bats/vendor
-	rm -f $(PWD)/test/bats/vendor/bats.tar.gz
-	ln -s $(PWD)/test/bats/vendor/bats-$(BATS_VER)/libexec/* \
-		$(PWD)/test/bats/
+	tar -xzf test/bats/vendor/bats.tar.gz -C test/bats/vendor/
+	@rm -f test/bats/vendor/bats.tar.gz
+	ln -s $(PWD)/test/bats/vendor/bats-$(BATS_VER)/libexec/* test/bats/
 endif
 
 
