@@ -27,8 +27,8 @@ RUN apk update \
     \
  # Download and prepare Pure-FTPd sources
  && curl -fL -o /tmp/pure-ftpd.tar.gz \
-         https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-1.0.48.tar.gz \
- && (echo "481b671d339952da873a3704671e0e1897cc7fa6f9393f470a228cd2154c029622e4ad726da707a16cde394319dd656db228c852ad87187786edeb2b59a08647  /tmp/pure-ftpd.tar.gz" \
+         https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-1.0.49.tar.gz \
+ && (echo "7e7d4c81c5237624051bde53db6d9abcbae565a4e8a88627d81d369064b475f4b56305c105ed275264cce068844caad25b2014f41e2540058553222151fe3af8  /tmp/pure-ftpd.tar.gz" \
          | sha512sum -c -) \
  && tar -xzf /tmp/pure-ftpd.tar.gz -C /tmp/ \
  && cd /tmp/pure-ftpd-* \
