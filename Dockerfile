@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/alpine
-FROM alpine:3.11
+FROM alpine:3.12
 
 
 # Build and install Pure-FTPd
@@ -11,7 +11,7 @@ RUN apk update \
     \
  # Install Pure-FTPd dependencies
  && apk add --no-cache \
-        libressl3.0-libcrypto libressl3.0-libssl \
+        libressl3.1-libcrypto libressl3.1-libssl \
         libsodium \
     \
  # Install tools for building
