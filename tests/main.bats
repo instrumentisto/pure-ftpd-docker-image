@@ -1,23 +1,6 @@
 #!/usr/bin/env bats
 
 
-@test "post_push hook is up-to-date" {
-  run sh -c "cat Makefile | grep 'TAGS ?= ' | cut -d ' ' -f 3"
-  [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
-  expected="$output"
-
-  run sh -c "cat hooks/post_push | grep 'for tag in' \
-                                 | cut -d '{' -f 2 \
-                                 | cut -d '}' -f 1"
-  [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
-  actual="$output"
-
-  [ "$actual" = "$expected" ]
-}
-
-
 @test "pure-ftpd is installed" {
   run docker run --rm --entrypoint sh $IMAGE -c 'which pure-ftpd'
   [ "$status" -eq 0 ]
@@ -29,7 +12,7 @@
 }
 
 @test "pure-ftpd has correct version" {
-  run sh -c "cat Makefile | grep 'VERSION ?= ' | cut -d ' ' -f 3"
+  run sh -c "cat Dockerfile | grep 'ARG pure_ftpd_ver=' | cut -d '=' -f2"
   [ "$status" -eq 0 ]
   [ ! "$output" = '' ]
   expected="$output"
@@ -57,7 +40,7 @@
 
 @test "PURE_PASSWDFILE is converted to PURE_DBFILE on container start" {
   run docker run --rm \
-    -v $(pwd)/test/resources/pureftpd.passwd:/etc/pureftpd.passwd:ro \
+    -v $(pwd)/tests/resources/pureftpd.passwd:/etc/pureftpd.passwd:ro \
       $IMAGE test -f /etc/pureftpd.pdb
   [ "$status" -eq 0 ]
 }

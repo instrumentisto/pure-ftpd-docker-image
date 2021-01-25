@@ -1,7 +1,23 @@
-Pure-FTPd Docker Image
+Pure-FTPd Docker image
 ======================
 
-[![GitHub release](https://img.shields.io/github/release/instrumentisto/pure-ftpd-docker-image.svg)](https://hub.docker.com/r/instrumentisto/pure-ftpd/tags) [![Build Status](https://travis-ci.org/instrumentisto/pure-ftpd-docker-image.svg?branch=master)](https://travis-ci.org/instrumentisto/pure-ftpd-docker-image) [![Docker Pulls](https://img.shields.io/docker/pulls/instrumentisto/pure-ftpd.svg)](https://hub.docker.com/r/instrumentisto/pure-ftpd) [![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg)][21]
+[![Release](https://img.shields.io/github/v/release/instrumentisto/pure-ftpd-docker-image "Release")](https://github.com/instrumentisto/pure-ftpd-docker-image/releases)
+[![CI](https://github.com/instrumentisto/pure-ftpd-docker-image/workflows/CI/badge.svg?branch=master "CI")](https://github.com/instrumentisto/pure-ftpd-docker-image/actions?query=workflow%3ACI+branch%3Amaster)
+[![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/pure-ftpd?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/pure-ftpd)
+[![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg "Uses s6-overlay")](https://github.com/just-containers/s6-overlay)
+
+[Docker Hub](https://hub.docker.com/r/instrumentisto/pure-ftpd)
+| [GitHub Container Registry](https://github.com/orgs/instrumentisto/packages/container/package/pure-ftpd)
+| [Quay.io](https://quay.io/repository/instrumentisto/pure-ftpd)
+
+[Changelog](https://github.com/instrumentisto/pure-ftpd-docker-image/blob/master/CHANGELOG.md)
+
+
+
+
+## Supported tags and respective `Dockerfile` links
+
+- [`1.0.49-r0`, `1.0.49`, `1.0`, `1`, `latest`][201]
 
 
 
@@ -88,17 +104,24 @@ This variant is highly recommended when final image size being as small as possi
 
 ### `X`
 
-Latest version of `X` Pure-FTPd major version.
+Latest tag of `X` Pure-FTPd's major version.
 
 
 ### `X.Y`
 
-Latest version of `X.Y` Pure-FTPd minor version.
+Latest tag of `X.Y` Pure-FTPd's minor version.
 
 
 ### `X.Y.Z`
 
-Concrete `X.Y.Z` version of Pure-FTPd.
+Latest tag of a concrete `X.Y.Z` version of Pure-FTPd.
+
+
+### `X.Y.Z-rN`
+
+Concrete `N` image revision tag of a Pure-FTPd's concrete `X.Y.Z` version.
+
+Once build, it's never updated.
 
 
 
@@ -137,13 +160,15 @@ The [sources][90] for producing `instrumentisto/pure-ftpd` Docker images are lic
 
 ## Issues
 
-We can't notice comments in the DockerHub so don't use them for reporting issue or asking question.
+We can't notice comments in the [DockerHub] (or other container registries) so don't use them for reporting issue or asking question.
 
 If you have any problems with or questions about this image, please contact us through a [GitHub issue][3].
 
 
 
 
+
+[DockerHub]: https://hub.docker.com
 
 [1]: http://alpinelinux.org
 [2]: https://hub.docker.com/_/alpine
@@ -161,3 +186,5 @@ If you have any problems with or questions about this image, please contact us t
 [91]: https://github.com/instrumentisto/pure-ftpd-docker-image/blob/master/LICENSE.md
 [92]: https://download.pureftpd.org/pub/pure-ftpd/doc/COPYING
 [101]: https://nvd.nist.gov/view/vuln/search-results?query=pure-ftpd&search_type=all&cves=on
+
+[201]: https://github.com/instrumentisto/pure-ftpd-docker-image/blob/master/Dockerfile

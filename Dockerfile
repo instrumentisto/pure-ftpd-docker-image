@@ -1,6 +1,13 @@
 # https://hub.docker.com/_/alpine
 FROM alpine:3.12
 
+ARG pure_ftpd_ver=1.0.49
+ARG s6_overlay_ver=2.0.0.1
+ARG build_rev=0
+
+LABEL org.opencontainers.image.source="\
+    https://github.com/instrumentisto/pure-ftpd-docker-image"
+
 
 # Build and install Pure-FTPd
 RUN apk update \
@@ -25,7 +32,7 @@ RUN apk update \
     \
  # Download and prepare Pure-FTPd sources
  && curl -fL -o /tmp/pure-ftpd.tar.gz \
-         https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-1.0.49.tar.gz \
+         https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${pure_ftpd_ver}.tar.gz \
  && (echo "7e7d4c81c5237624051bde53db6d9abcbae565a4e8a88627d81d369064b475f4b56305c105ed275264cce068844caad25b2014f41e2540058553222151fe3af8  /tmp/pure-ftpd.tar.gz" \
          | sha512sum -c -) \
  && tar -xzf /tmp/pure-ftpd.tar.gz -C /tmp/ \
@@ -71,7 +78,7 @@ RUN apk update \
 RUN apk add --update --no-cache --virtual .tool-deps \
         curl \
  && curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v2.0.0.1/s6-overlay-amd64.tar.gz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
     \
  # Cleanup unnecessary stuff
