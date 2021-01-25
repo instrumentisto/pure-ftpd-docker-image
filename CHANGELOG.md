@@ -14,6 +14,7 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - [s6-overlay] 2.2.0.1: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.1>
+- [Alpine Linux] 3.13: <https://www.alpinelinux.org/posts/Alpine-3.13.0-released.html>
 
 
 
