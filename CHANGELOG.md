@@ -11,6 +11,10 @@ All user visible changes to this project will be documented in this file. This p
 
 [Diff](/../../compare/1.0.49-r2...1.0.49-r3)
 
+### Upgraded
+
+- [s6-overlay] 2.2.0.3: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.3>
+
 ### Security updated
 
 - [Alpine Linux] 3.13.3: <https://github.com/docker-library/official-images/commit/108c1e0b9f27e708f04fc3e577c6129248067927>
