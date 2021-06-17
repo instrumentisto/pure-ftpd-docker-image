@@ -1,9 +1,9 @@
 # https://hub.docker.com/_/alpine
-FROM alpine:3.13.5
+FROM alpine:3.14
 
 ARG pure_ftpd_ver=1.0.49
 ARG s6_overlay_ver=2.2.0.3
-ARG build_rev=5
+ARG build_rev=6
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/pure-ftpd-docker-image"
@@ -18,7 +18,7 @@ RUN apk update \
     \
  # Install Pure-FTPd dependencies
  && apk add --no-cache \
-        libressl3.1-libcrypto libressl3.1-libssl \
+        libretls \
         libsodium \
     \
  # Install tools for building
@@ -27,7 +27,7 @@ RUN apk update \
     \
  # Install Pure-FTPd build dependencies
  && apk add --no-cache --virtual .build-deps \
-        libressl-dev \
+        libretls-dev \
         libsodium-dev \
     \
  # Download and prepare Pure-FTPd sources
