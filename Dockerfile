@@ -1,9 +1,9 @@
 # https://hub.docker.com/_/alpine
-FROM alpine:3.14.3
+FROM alpine:3.15
 
 ARG pure_ftpd_ver=1.0.49
 ARG s6_overlay_ver=2.2.0.3
-ARG build_rev=9
+ARG build_rev=10
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/pure-ftpd-docker-image"
