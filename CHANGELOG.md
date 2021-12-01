@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.50-r0] · 2021-01-25
+[1.0.50-r0]: /../../tree/1.0.50-r0
+
+[Diff](/../../compare/1.0.49-r10...1.0.50-r0)
+
+### Upgraded
+
+- [Pure-FTPd] 1.0.50: <https://github.com/jedisct1/pure-ftpd/releases/tag/1.0.50>
+
+
+
+
 ## [1.0.49-r10] · 2021-11-25
 [1.0.49-r10]: /../../tree/1.0.49-r10
 
