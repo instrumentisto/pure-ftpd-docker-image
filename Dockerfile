@@ -2,8 +2,8 @@
 FROM alpine:3.15
 
 ARG pure_ftpd_ver=1.0.50
-ARG s6_overlay_ver=2.2.0.3
-ARG build_rev=0
+ARG s6_overlay_ver=3.0.0.2
+ARG build_rev=1
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/pure-ftpd-docker-image"
@@ -77,23 +77,28 @@ RUN apk update \
 # Install s6-overlay
 RUN apk add --update --no-cache --virtual .tool-deps \
         curl \
- && curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-amd64.tar.gz \
- && tar -xzf /tmp/s6-overlay.tar.gz -C / \
+ && curl -fL -o /tmp/s6-overlay-noarch.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-noarch-${s6_overlay_ver}.tar.xz \
+ && curl -fL -o /tmp/s6-overlay-bin.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-x86_64-${s6_overlay_ver}.tar.xz \
+ && tar -xf /tmp/s6-overlay-noarch.tar.xz -C / \
+ && tar -xf /tmp/s6-overlay-bin.tar.xz -C / \
+ && which syslogd \
     \
  # Cleanup unnecessary stuff
  && apk del .tool-deps \
  && rm -rf /var/cache/apk/* \
            /tmp/*
 
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
+ENV S6_KEEP_ENV=1 \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     S6_CMD_WAIT_FOR_SERVICES=1
 
 
 COPY rootfs /
 
-RUN chmod +x /etc/services.d/*/run \
-             /etc/cont-init.d/*
+RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run \
+             /etc/s6-overlay/s6-rc.d/*/*.sh
 
 
 EXPOSE 21 30000-30009

@@ -44,3 +44,12 @@
       $IMAGE test -f /etc/pureftpd.pdb
   [ "$status" -eq 0 ]
 }
+
+@test "PURE_PASSWDFILE is converted to PURE_DBFILE from custom location" {
+  run docker run --rm \
+    -e PURE_PASSWDFILE=/tmp/pureftpd.passwd \
+    -e PURE_DBFILE=/pureftpd.pdb \
+    -v $(pwd)/tests/resources/pureftpd.passwd:/tmp/pureftpd.passwd:ro \
+      $IMAGE test -f /pureftpd.pdb
+  [ "$status" -eq 0 ]
+}
