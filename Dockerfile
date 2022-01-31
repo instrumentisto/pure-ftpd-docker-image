@@ -83,7 +83,6 @@ RUN apk add --update --no-cache --virtual .tool-deps \
          https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-x86_64-${s6_overlay_ver}.tar.xz \
  && tar -xf /tmp/s6-overlay-noarch.tar.xz -C / \
  && tar -xf /tmp/s6-overlay-bin.tar.xz -C / \
- && which syslogd \
     \
  # Cleanup unnecessary stuff
  && apk del .tool-deps \
