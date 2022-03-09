@@ -2,8 +2,8 @@
 FROM alpine:3.15
 
 ARG pure_ftpd_ver=1.0.50
-ARG s6_overlay_ver=3.0.0.2
-ARG build_rev=1
+ARG s6_overlay_ver=3.1.0.1
+ARG build_rev=2
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/pure-ftpd-docker-image"
@@ -78,9 +78,9 @@ RUN apk update \
 RUN apk add --update --no-cache --virtual .tool-deps \
         curl \
  && curl -fL -o /tmp/s6-overlay-noarch.tar.xz \
-         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-noarch-${s6_overlay_ver}.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-noarch.tar.xz \
  && curl -fL -o /tmp/s6-overlay-bin.tar.xz \
-         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-x86_64-${s6_overlay_ver}.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-x86_64.tar.xz \
  && tar -xf /tmp/s6-overlay-noarch.tar.xz -C / \
  && tar -xf /tmp/s6-overlay-bin.tar.xz -C / \
     \
