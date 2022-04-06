@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.50-r6] · 2022-04-06
+[1.0.50-r6]: /../../tree/1.0.50-r6
+
+[Diff](/../../compare/1.0.50-r5...1.0.50-r6)
+
+### Security updated
+
+- [Alpine Linux] 3.15.4: <https://github.com/docker-library/official-images/commit/1c3c904f7310fa85d2efad018596cc040e00c018>
+
+
+
+
 ## [1.0.50-r5] · 2022-03-29
 [1.0.50-r5]: /../../tree/1.0.50-r5
 
