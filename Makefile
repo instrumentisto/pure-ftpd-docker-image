@@ -71,13 +71,22 @@ docker-tags = $(strip $(if $(call eq,$(tags),),\
 #	                  [S6_OVERLAY_VER=<s6-overlay-version>]
 #	                  [BUILD_REV=<build-revision>]
 
+github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
+github_repo := $(strip $(or $(GITHUB_REPOSITORY),\
+                            instrumentisto/pure-ftpd-docker-image))
+
 docker.image:
 	docker build --network=host --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg pure_ftpd_ver=$(PURE_FTPD_VER) \
 		--build-arg s6_overlay_ver=$(S6_OVERLAY_VER) \
 		--build-arg build_rev=$(BUILD_REV) \
-		-t instrumentisto/$(NAME):$(if $(call eq,$(tag),),$(VERSION),$(tag)) ./
+		--label org.opencontainers.image.source=$(github_url)/$(github_repo) \
+		--label org.opencontainers.image.revision=$(strip \
+			$(shell git show --pretty=format:%H --no-patch)) \
+		--label org.opencontainers.image.version=$(strip \
+			$(shell git describe --tags --dirty)) \
+		-t instrumentisto/$(NAME):$(or $(tag),$(VERSION)) ./
 
 
 # Manually push Docker images to container registries.
@@ -139,7 +148,7 @@ test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
 	@make npm.install
 endif
-	IMAGE=instrumentisto/$(NAME):$(if $(call eq,$(tag),),$(VERSION),$(tag)) \
+	IMAGE=instrumentisto/$(NAME):$(or $(tag),$(VERSION)) \
 	node_modules/.bin/bats \
 		--timing $(if $(call eq,$(CI),),--pretty,--formatter tap) \
 		tests/main.bats
