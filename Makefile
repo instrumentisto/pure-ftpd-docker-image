@@ -113,12 +113,10 @@ endef
 #	                 [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
 #	                 [namespaces=($(NAMESPACES)|<prefix-1>[,<prefix-2>...])]
 
-docker-tags-of = $(if $(call eq,$(of),),$(VERSION),$(of))
-
 docker.tags:
 	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
 		$(foreach namespace,$(subst $(comma), ,$(docker-namespaces)),\
-			$(call docker.tags.do,$(docker-tags-of),$(namespace),$(tag))))
+			$(call docker.tags.do,$(or $(of),$(VERSION)),$(namespace),$(tag))))
 define docker.tags.do
 	$(eval from := $(strip $(1)))
 	$(eval repo := $(strip $(2)))
@@ -186,7 +184,7 @@ endif
 # Usage:
 #	make git.release [ver=($(VERSION)|<proj-ver>)]
 
-git-release-tag = $(strip $(if $(call eq,$(ver),),$(VERSION),$(ver)))
+git-release-tag = $(strip $(or $(ver),$(VERSION)))
 
 git.release:
 ifeq ($(shell git rev-parse $(git-release-tag) >/dev/null 2>&1 && echo "ok"),ok)
