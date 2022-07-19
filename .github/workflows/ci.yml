@@ -30,12 +30,12 @@ jobs:
       - run: make docker.image no-cache=yes
                   tag=build-${{ github.run_number }}
 
-      - run: make docker.tar to-file=image.tar
+      - run: make docker.tar to-file=.cache/image.tar
                   tags=build-${{ github.run_number }}
       - uses: actions/upload-artifact@v3
         with:
           name: image-${{ github.run_number }}
-          path: image.tar
+          path: .cache/image.tar
           retention-days: 1
 
 
@@ -55,7 +55,8 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: image-${{ github.run_number }}
-      - run: make docker.untar from-file=image.tar
+          path: .cache/
+      - run: make docker.untar from-file=.cache/image.tar
 
       - run: make test.docker
                   tag=build-${{ github.run_number }}
@@ -71,7 +72,7 @@ jobs:
     name: Release Docker image
     needs: ["build", "test"]
     if: ${{ github.event_name == 'push'
-            && startsWith(github.ref, 'refs/tags/') }}
+         && startsWith(github.ref, 'refs/tags/') }}
     strategy:
       fail-fast: false
       matrix:
@@ -101,8 +102,9 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: image-${{ github.run_number }}
+          path: .cache/
         if: ${{ steps.skip.outputs.no == 'true' }}
-      - run: make docker.untar from-file=image.tar
+      - run: make docker.untar from-file=.cache/image.tar
         if: ${{ steps.skip.outputs.no == 'true' }}
 
       - name: Login to ${{ matrix.registry }} container registry
@@ -121,9 +123,8 @@ jobs:
                      || secrets.GITHUB_TOKEN }}
         if: ${{ steps.skip.outputs.no == 'true' }}
 
-      - run: make docker.tags
+      - run: make docker.tags of=build-${{ github.run_number }}
                   registries=${{ matrix.registry }}
-                  of=build-${{ github.run_number }}
         if: ${{ steps.skip.outputs.no == 'true' }}
       - run: make docker.push
                   registries=${{ matrix.registry }}
@@ -140,7 +141,7 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKERHUB_BOT_USER }}
           DOCKER_PASS: ${{ secrets.DOCKERHUB_BOT_PASS }}
         if: ${{ steps.skip.outputs.no == 'true'
-                && matrix.registry == 'docker.io' }}
+             && matrix.registry == 'docker.io' }}
       - name: Update README on Quay.io
         uses: christian-korneck/update-container-description-action@v1
         with:
@@ -150,13 +151,13 @@ jobs:
         env:
           DOCKER_APIKEY: ${{ secrets.QUAYIO_API_TOKEN }}
         if: ${{ steps.skip.outputs.no == 'true'
-                && matrix.registry == 'quay.io' }}
+             && matrix.registry == 'quay.io' }}
 
   release-github:
     name: Release on GitHub
     needs: ["release-docker"]
     if: ${{ github.event_name == 'push'
-            && startsWith(github.ref, 'refs/tags/') }}
+         && startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -170,7 +171,7 @@ jobs:
       - name: Parse CHANGELOG link
         id: changelog
         run: echo ::set-output
-                  name=LINK::https://github.com/${{ github.repository }}/blob/${{ steps.semver.outputs.group1 }}/CHANGELOG.md#$(sed -n '/^## \[${{ steps.semver.outputs.group1 }}\]/{s/^## \[\(.*\)\][^0-9]*\([0-9].*\)/\1--\2/;s/[^0-9a-z-]*//g;p;}' CHANGELOG.md)
+                  name=LINK::${{ github.server_url }}/${{ github.repository }}/blob/${{ steps.semver.outputs.group1 }}/CHANGELOG.md#$(sed -n '/^## \[${{ steps.semver.outputs.group1 }}\]/{s/^## \[\(.*\)\][^0-9]*\([0-9].*\)/\1--\2/;s/[^0-9a-z-]*//g;p;}' CHANGELOG.md)
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
