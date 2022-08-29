@@ -1,9 +1,9 @@
 # https://hub.docker.com/_/alpine
-FROM alpine:3.16.2
+FROM alpine:3.16
 
 ARG pure_ftpd_ver=1.0.51
-ARG s6_overlay_ver=3.1.1.2
-ARG build_rev=5
+ARG s6_overlay_ver=3.1.2.0
+ARG build_rev=6
 
 
 # Build and install Pure-FTPd
