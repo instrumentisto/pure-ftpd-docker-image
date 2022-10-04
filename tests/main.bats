@@ -53,3 +53,9 @@
       $IMAGE test -f /pureftpd.pdb
   [ "$status" -eq 0 ]
 }
+
+
+@test "syslogd runs ok" {
+  run docker run --rm --entrypoint sh $IMAGE -c '/sbin/syslogd --help'
+  [ "$status" -eq 0 ]
+}
