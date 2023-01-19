@@ -17,7 +17,7 @@ Pure-FTPd Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.0.51-r9`, `1.0.51`, `1.0`, `1`, `latest`][201]
+- [`1.0.51-r10`, `1.0.51`, `1.0`, `1`, `latest`][201]
 
 
 
@@ -95,7 +95,7 @@ docker run --rm -it -v $(pwd)/my.passwd:/etc/pureftpd.passwd --entrypoint sh \
 
 
 
-## Image versions
+## Image tags
 
 This image is based on the popular [Alpine Linux project][1], available in [the alpine official image][2]. [Alpine Linux][1] is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
 
