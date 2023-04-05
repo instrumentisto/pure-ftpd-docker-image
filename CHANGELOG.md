@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.51-r15] · 2023-04-05
+[1.0.51-r15]: /../../tree/1.0.51-r15
+
+[Diff](/../../compare/1.0.51-r14...1.0.51-r15)
+
+### Upgraded
+
+- [s6-overlay] 3.1.4.2: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.4.2>
+
+
+
+
 ## [1.0.51-r14] · 2023-03-31
 [1.0.51-r14]: /../../tree/1.0.51-r14
 
