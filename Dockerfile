@@ -2,8 +2,8 @@
 FROM alpine:3.17
 
 ARG pure_ftpd_ver=1.0.51
-ARG s6_overlay_ver=3.1.4.2
-ARG build_rev=15
+ARG s6_overlay_ver=3.1.5.0
+ARG build_rev=16
 
 
 # Build and install Pure-FTPd
