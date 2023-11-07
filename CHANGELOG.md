@@ -6,6 +6,22 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.51-r19] · 2023-11-07
+[1.0.51-r19]: /../../tree/1.0.51-r19
+
+[Diff](/../../compare/1.0.51-r18...1.0.51-r19)
+
+### Upgraded
+
+- [s6-overlay] 3.1.6.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.6.0>
+
+### Security updated
+
+- [Alpine Linux] 3.18.4: <https://github.com/docker-library/official-images/commit/2f22914dcf488bd066771452d2c694ad4f7e88c4>
+
+
+
+
 ## [1.0.51-r18] · 2023-06-15
 [1.0.51-r18]: /../../tree/1.0.51-r18
 
