@@ -2,7 +2,7 @@
 FROM alpine:3.18
 
 ARG pure_ftpd_ver=1.0.51
-ARG s6_overlay_ver=3.1.6.1
+ARG s6_overlay_ver=3.1.6.2
 ARG build_rev=20
 
 
