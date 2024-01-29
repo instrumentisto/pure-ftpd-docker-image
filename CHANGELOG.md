@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.51-r23] · 2024-01-29
+[1.0.51-r23]: /../../tree/1.0.51-r23
+
+[Diff](/../../compare/1.0.51-r22...1.0.51-r23)
+
+### Security updated
+
+- [Alpine Linux] 3.19.1: <https://github.com/docker-library/official-images/commit/a5a02e00e489cfaa9dc8056755cd00abe7d0f646>
+
+
+
+
 ## [1.0.51-r22] · 2023-12-08
 [1.0.51-r22]: /../../tree/1.0.51-r22
 
