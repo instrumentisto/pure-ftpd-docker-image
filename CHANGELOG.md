@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.51-r24] · 2024-05-24
+[1.0.51-r24]: /../../tree/1.0.51-r24
+
+[Diff](/../../compare/1.0.51-r23...1.0.51-r24)
+
+### Upgraded
+
+- [Alpine Linux] 3.20: <https://alpinelinux.org/posts/Alpine-3.20.0-released.html>
+
+
+
+
 ## [1.0.51-r23] · 2024-01-29
 [1.0.51-r23]: /../../tree/1.0.51-r23
 
