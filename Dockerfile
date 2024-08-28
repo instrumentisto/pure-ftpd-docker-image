@@ -37,12 +37,15 @@ RUN apk update \
     \
  # Build Pure-FTPd from sources
  && ./configure --prefix=/usr \
+        --sysconfdir=/etc/pure-ftpd \
+        --localstatedir=/var/pure-ftpd \
         --with-puredb \
         --with-quotas \
         --with-ratios \
         --with-rfc2640 \
         --with-throttling  \
         --with-tls \
+        --with-peruserlimits \
         --without-capabilities \
         --without-humor \
         --without-inetd \
@@ -61,7 +64,7 @@ RUN apk update \
  && install -d -o pure-ftpd -g pure-ftpd /data \
  # Disable daemonization
  && sed -i -e 's,^Daemonize .*,Daemonize no,' \
-        /etc/pure-ftpd.conf \
+        /etc/pure-ftpd/pure-ftpd.conf \
  # No documentation included to keep image size smaller
  && rm -rf /usr/share/man/* \
     \
@@ -102,4 +105,4 @@ EXPOSE 21 30000-30009
 
 ENTRYPOINT ["/init"]
 
-CMD ["pure-ftpd", "/etc/pure-ftpd.conf"]
+CMD ["pure-ftpd", "/etc/pure-ftpd/pure-ftpd.conf"]
