@@ -3,7 +3,7 @@ FROM alpine:3.20
 
 ARG pure_ftpd_ver=1.0.51
 ARG s6_overlay_ver=3.2.0.0
-ARG build_rev=27
+ARG build_rev=28
 
 
 # Build and install Pure-FTPd
@@ -37,13 +37,13 @@ RUN apk update \
     \
  # Build Pure-FTPd from sources
  && ./configure --prefix=/usr \
+        --with-peruserlimits \
         --with-puredb \
         --with-quotas \
         --with-ratios \
         --with-rfc2640 \
         --with-throttling  \
         --with-tls \
-        --with-peruserlimits \
         --without-capabilities \
         --without-humor \
         --without-inetd \

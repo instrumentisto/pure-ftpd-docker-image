@@ -6,6 +6,20 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.51-r28] · 2024-08-29
+[1.0.51-r28]: /../../tree/1.0.51-r28
+
+[Diff](/../../compare/1.0.51-r27...1.0.51-r28)
+
+### Added
+
+- `PER_USER_LIMITS` support. ([#7])
+
+[#7]: /../../pull/7
+
+
+
+
 ## [1.0.51-r27] · 2024-07-26
 [1.0.51-r27]: /../../tree/1.0.51-r27
 
