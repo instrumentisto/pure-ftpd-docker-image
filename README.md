@@ -2,7 +2,7 @@ Pure-FTPd Docker image
 ======================
 
 [![Release](https://img.shields.io/github/v/release/instrumentisto/pure-ftpd-docker-image "Release")](https://github.com/instrumentisto/pure-ftpd-docker-image/releases)
-[![CI](https://github.com/instrumentisto/pure-ftpd-docker-image/workflows/CI/badge.svg?branch=main "CI")](https://github.com/instrumentisto/pure-ftpd-docker-image/actions?query=workflow%3ACI+branch%3Amain)
+[![CI](https://github.com/instrumentisto/pure-ftpd-docker-image/actions/workflows/ci.yml/badge.svg?branch=main "CI")](https://github.com/instrumentisto/pure-ftpd-docker-image/actions?query=workflow%3ACI+branch%3Amain)
 [![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/pure-ftpd?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/pure-ftpd)
 [![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg "Uses s6-overlay")](https://github.com/just-containers/s6-overlay)
 
@@ -17,7 +17,7 @@ Pure-FTPd Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.0.52-r4`, `1.0.52`, `1.0`, `1`, `latest`][201]
+- [`1.0.52-r5`, `1.0.52`, `1.0`, `1`, `latest`][201]
 
 
 
