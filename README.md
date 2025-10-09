@@ -17,7 +17,7 @@ Pure-FTPd Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.0.52-r9`, `1.0.52`, `1.0`, `1`, `latest`][201]
+- [`1.0.52-r10`, `1.0.52`, `1.0`, `1`, `latest`][201]
 
 
 
