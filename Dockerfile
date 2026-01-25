@@ -1,9 +1,9 @@
 # https://hub.docker.com/_/alpine
 FROM alpine:3.23
 
-ARG pure_ftpd_ver=1.0.52
+ARG pure_ftpd_ver=1.0.53
 ARG s6_overlay_ver=3.2.1.0
-ARG build_rev=12
+ARG build_rev=0
 
 
 # Build and install Pure-FTPd
@@ -30,7 +30,7 @@ RUN apk update \
  # Download and prepare Pure-FTPd sources
  && curl -fL -o /tmp/pure-ftpd.tar.gz \
          https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${pure_ftpd_ver}.tar.gz \
- && (echo "d3aa87e0e9beca464f5dc23ea86835ba42a8bb57120e8c0a4cd975925aed850a442766c1ef605e563d6c61a37967b4f283ababb991493327ce6f0a1749aae01a  /tmp/pure-ftpd.tar.gz" \
+ && (echo "cdab1feab9e046720ceaac27c7718e970411705dcaf4254a23878c777eb2171de2f5a59223c74f4389c58e755c1aded598cb73053a340dc3a32692c6ca04dcfe  /tmp/pure-ftpd.tar.gz" \
          | sha512sum -c -) \
  && tar -xzf /tmp/pure-ftpd.tar.gz -C /tmp/ \
  && cd /tmp/pure-ftpd-* \

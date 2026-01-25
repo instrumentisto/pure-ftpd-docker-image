@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.53-r0] · 2026-01-25
+[1.0.53-r0]: /../../tree/1.0.53-r0
+
+[Diff](/../../compare/1.0.52-r12...1.0.53-r0)
+
+### Upgraded
+
+- [Pure-FTPd] 1.0.53: <https://github.com/jedisct1/pure-ftpd/blob/1.0.53/ChangeLog#L1-L14>
+
+
+
+
 ## [1.0.52-r12] · 2025-12-18
 [1.0.52-r12]: /../../tree/1.0.52-r12
 
