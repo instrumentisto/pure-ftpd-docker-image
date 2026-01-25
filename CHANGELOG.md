@@ -14,6 +14,7 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - [Pure-FTPd] 1.0.53: <https://github.com/jedisct1/pure-ftpd/blob/1.0.53/ChangeLog#L1-L14>
+- [s6-overlay] 3.2.2.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.2.2.0>
 
 
 
